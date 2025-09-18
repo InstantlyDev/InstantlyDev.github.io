@@ -6,10 +6,7 @@ const timerElement = document.getElementById('timer');
 const messageContainer = document.getElementById('messageContainer');
 
 const codes = [
-    { code: 123, url: 'https://example1.com' },
-    { code: 456, url: 'https://example2.com' },
-    { code: 789, url: 'https://example3.com' }
-    // Можно добавить больше записей по аналогии
+    { code: 1, url: 'https://go.linkify.ru/2Bmz' }
 ];
 
 // Очистка состояния

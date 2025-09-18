@@ -1,7 +1,9 @@
 const searchButton = document.getElementById('searchButton');
 const codeInput = document.getElementById('codeInput');
 const errorMessage = document.getElementById('errorMessage');
-const loading = document.getElementById('loading');
+const successMessage = document.getElementById('successMessage');
+const timerElement = document.getElementById('timer');
+const messageContainer = document.getElementById('messageContainer');
 
 const codes = [
     { code: 123, url: 'https://example1.com' },
@@ -10,9 +12,51 @@ const codes = [
     // Можно добавить больше записей по аналогии
 ];
 
+// Очистка состояния
+function resetUI() {
+    errorMessage.textContent = '';
+    successMessage.style.display = 'none';
+    timerElement.style.display = 'none';
+    codeInput.style.transition = '';
+    codeInput.style.width = '200px';
+    codeInput.style.borderRadius = '5px';
+    searchButton.style.transition = '';
+    searchButton.style.width = '';
+    successMessage.style.animation = '';
+    timerElement.style.animation = '';
+    messageContainer.style.display = 'none';
+}
+
+// Функция анимации таймера
+function startTimer(record) {
+    let timeLeft = 3;
+    let countdownInterval = setInterval(() => {
+        if (timeLeft >= 0) {
+            timerElement.textContent = timeLeft === 0 ? '0' : timeLeft;
+            timerElement.style.fontSize = '20vh';
+            timerElement.style.width = '20vw';
+            timerElement.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.5)' },
+                { transform: 'scale(1)' }
+            ], {
+                duration: 500,
+                iterations: 1
+            });
+            timeLeft--;
+        } else {
+            clearInterval(countdownInterval);
+            setTimeout(() => {
+                window.location.href = record.url;
+            }, 500);
+        }
+    }, 1000);
+}
+
+// Обработчик кнопки "Найти"
 searchButton.addEventListener('click', () => {
     const inputCode = parseInt(codeInput.value);
-    errorMessage.textContent = ''; // Скрываем ошибку
+    resetUI(); // Сбрасываем состояние перед новым поиском
 
     // Проверяем введенный код
     if (isNaN(inputCode) || inputCode < 1 || inputCode > 1000) {
@@ -28,48 +72,23 @@ searchButton.addEventListener('click', () => {
         return;
     }
 
-    // Показываем анимацию загрузки
-    loading.style.display = 'block';
+    // Если код найден, показываем сообщение
+    messageContainer.style.display = 'flex'; // Показать контейнер с сообщением
 
-    // Имитация задержки перед редиректом
+    // Анимация: UI элементы уезжают далеко вниз и исчезают
+    document.querySelector('.container').style.transform = 'translateY(150vh)';
+    document.querySelector('.container').style.opacity = '0';
+
+    // Показываем "Код найден!" в центре экрана через 0.5 секунды после исчезновения элементов
     setTimeout(() => {
-        // Очищаем ошибку и сообщение о загрузке перед перенаправлением
-        errorMessage.textContent = '';
-        loading.style.display = 'none';
+        successMessage.style.display = 'flex';
+        successMessage.style.animation = 'fadeIn 1s forwards';
+    }, 500);
 
-        // Перенаправляем на сайт
-        window.location.href = record.url;
-    }, 1000); // Задержка 1 секунда
+    // Показываем таймер через 2 секунды
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+        timerElement.style.display = 'flex';
+        startTimer(record);
+    }, 2000);
 });
-
-// Функция для генерации случайного фона
-function generateBackground() {
-    const shapesContainer = document.createElement('div');
-    shapesContainer.classList.add('background-shapes');
-    document.body.appendChild(shapesContainer);
-
-    const shapeTypes = ['circle', 'square', 'triangle', 'line', 'wave', 'empty-circle', 'empty-square', 'empty-triangle'];
-    const numShapes = 50; // Количество фигур на фоне
-
-    for (let i = 0; i < numShapes; i++) {
-        const shape = document.createElement('div');
-        const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-        const size = Math.floor(Math.random() * 100) + 20; // Размер от 20px до 120px
-        const rotation = Math.floor(Math.random() * 360); // Поворот от 0 до 360 градусов
-        const positionX = Math.floor(Math.random() * window.innerWidth);
-        const positionY = Math.floor(Math.random() * window.innerHeight);
-
-        shape.style.width = `${size}px`;
-        shape.style.height = `${size}px`;
-        shape.style.position = 'absolute';
-        shape.style.top = `${positionY}px`;
-        shape.style.left = `${positionX}px`;
-        shape.style.transform = `rotate(${rotation}deg)`;
-
-        // Добавляем классы для разных типов фигур
-        shape.classList.add('shape', shapeType);
-        shapesContainer.appendChild(shape);
-    }
-}
-
-generateBackground();

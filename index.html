@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Мой первый сайт на GitHub Pages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AllGames</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Привет, мир!</h1>
-  <p>Это мой сайт, размещённый через GitHub Pages 🚀</p>
+    <div class="container">
+        <div class="logo">
+            <span class="all">All</span><span class="games">Games</span>
+        </div>
+        <input type="number" id="codeInput" placeholder="Введите код (от 1 до 1000)" />
+        <button id="searchButton">Найти</button>
+        <div id="errorMessage"></div>
+        <div id="loading" class="loading">Загрузка...</div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

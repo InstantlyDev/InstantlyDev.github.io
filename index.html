@@ -11,10 +11,16 @@
         <div class="logo">
             <span class="all">All</span><span class="games">Games</span>
         </div>
-        <input type="number" id="codeInput" placeholder="Введите код (от 1 до 1000)" />
-        <button id="searchButton">Найти</button>
+        <div class="input-container">
+            <input type="number" id="codeInput" placeholder="Введите код (от 1 до 1000)" />
+            <button id="searchButton">Найти</button>
+        </div>
         <div id="errorMessage"></div>
-        <div id="loading" class="loading">Загрузка...</div>
+    </div>
+
+    <div id="messageContainer">
+        <div id="successMessage" class="success-message">Код найден!</div>
+        <div id="timer" class="timer"></div>
     </div>
 
     <script src="script.js"></script>

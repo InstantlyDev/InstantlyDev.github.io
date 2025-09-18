@@ -12,22 +12,28 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
     position: relative;
 }
 
 .container {
     text-align: center;
     background-color: white;
-    padding: 30px;
-    border-radius: 8px;
+    padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .logo {
-    font-size: 50px; /* Увеличиваем размер логотипа */
+    font-size: 80px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .all {
@@ -38,13 +44,21 @@ body {
     color: blue;
 }
 
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 input {
     padding: 10px;
     width: 200px;
-    margin-bottom: 10px;
+    margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    transition: width 0.5s ease, border-radius 0.5s ease;
 }
 
 button {
@@ -68,12 +82,30 @@ button:hover {
     margin-top: 10px;
 }
 
-.loading {
-    display: none;
-    font-size: 18px;
-    color: blue;
+#messageContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    display: none; /* Изначально скрыт */
+    flex-direction: column; /* Стиль для центрирования остается */
+    justify-content: center; /* Стиль для центрирования остается */
+    align-items: center; /* Стиль для центрирования остается */
+}
+
+.success-message {
+    display: none; /* Изначально скрыт */
+    color: lightgreen;
+    font-size: 20vh;
+    width: 20vw;
     margin-top: 20px;
+    font-weight: bold;
     animation: fadeIn 1s forwards;
+    display: flex; /* Изначально скрыт, но когда JS его покажет, он будет flex */
+    justify-content: center; /* Стиль для центрирования остается */
+    align-items: center; /* Стиль для центрирования остается */
 }
 
 @keyframes fadeIn {
@@ -85,73 +117,15 @@ button:hover {
     }
 }
 
-/* Для фона */
-.background-shapes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.shape {
-    background-color: transparent;
-    border-radius: 50%;
-    border: 2px solid;
-}
-
-/* Фигуры для фона */
-
-.circle {
-    background-color: transparent;
-    border-radius: 50%;
-}
-
-.square {
-    background-color: transparent;
-}
-
-.triangle {
-    width: 0;
-    height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 60px solid black;
-}
-
-.line {
-    width: 100px;
-    height: 2px;
-    background-color: blue;
-}
-
-.wave {
-    width: 100px;
-    height: 10px;
-    background-image: linear-gradient(to right, transparent 20%, blue 20%, blue 40%, transparent 40%);
-    background-size: 200% 100%;
-    animation: waveAnimation 1.5s infinite;
-}
-
-@keyframes waveAnimation {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 0;
-    }
-}
-
-.empty-circle, .empty-square, .empty-triangle {
-    border: 2px solid black;
-}
-
-.empty-triangle {
-    width: 0;
-    height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 60px solid transparent;
-    border-bottom-color: black;
+.timer {
+    display: none;
+    font-size: 20vh;
+    width: 20vw;
+    font-weight: bold;
+    color: black;
+    margin-top: 20px;
+    animation: fadeIn 1s forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

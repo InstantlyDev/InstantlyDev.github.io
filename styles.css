@@ -1,131 +1,140 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    position: relative;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;       /* высота ровно экран */
+  margin: 0;
+  overflow: hidden;    /* принудительно отключаем прокрутку */
+  position: relative;
 }
 
 .container {
-    text-align: center;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  text-align: center;
+  background-color: white;
+  padding: 2vh 2vw;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  overflow: hidden; /* доп. защита внутри контейнера */
 }
 
 .logo {
-    font-size: 80px;
-    font-weight: bold;
-    margin-bottom: 40px;
+  font-size: clamp(30px, 10vw, 80px); /* авто-масштаб */
+  font-weight: bold;
+  margin-bottom: 5vh;
+  text-align: center;
 }
 
 .all {
-    color: black;
+  color: black;
 }
 
 .games {
-    color: blue;
+  color: blue;
 }
 
 .input-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2vh;
+  flex-wrap: wrap;       /* перенос элементов на малых экранах */
+  gap: 1vh 1vw;
 }
 
 input {
-    padding: 10px;
-    width: 200px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: width 0.5s ease, border-radius 0.5s ease;
+  padding: 1vh 1vw;
+  width: clamp(120px, 40vw, 200px);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: clamp(12px, 2vw, 16px);
+  transition: width 0.5s ease, border-radius 0.5s ease;
 }
 
 button {
-    padding: 10px 20px;
-    border: none;
-    background-color: blue;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 1vh 2vw;
+  border: none;
+  background-color: blue;
+  color: white;
+  font-size: clamp(12px, 2vw, 16px);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: darkblue;
+  background-color: darkblue;
 }
 
 #errorMessage {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
+  color: red;
+  font-size: clamp(12px, 2vw, 14px);
+  margin-top: 1vh;
+  text-align: center;
+  max-width: 90%;
+  overflow-wrap: break-word;
 }
 
 #messageContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 10;
-    display: none; /* Изначально скрыт */
-    flex-direction: column; /* Стиль для центрирования остается */
-    justify-content: center; /* Стиль для центрирования остается */
-    align-items: center; /* Стиль для центрирования остается */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
 }
 
 .success-message {
-    display: none; /* Изначально скрыт */
-    color: lightgreen;
-    font-size: 20vh;
-    width: 20vw;
-    margin-top: 20px;
-    font-weight: bold;
-    animation: fadeIn 1s forwards;
-    display: flex; /* Изначально скрыт, но когда JS его покажет, он будет flex */
-    justify-content: center; /* Стиль для центрирования остается */
-    align-items: center; /* Стиль для центрирования остается */
+  display: none;
+  color: lightgreen;
+  font-size: clamp(40px, 12vh, 80px);
+  margin-top: 2vh;
+  font-weight: bold;
+  animation: fadeIn 1s forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .timer {
-    display: none;
-    font-size: 20vh;
-    width: 20vw;
-    font-weight: bold;
-    color: black;
-    margin-top: 20px;
-    animation: fadeIn 1s forwards;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  font-size: clamp(40px, 12vh, 80px);
+  font-weight: bold;
+  color: black;
+  margin-top: 2vh;
+  animation: fadeIn 1s forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

@@ -33,6 +33,43 @@ searchButton.addEventListener('click', () => {
 
     // Имитация задержки перед редиректом
     setTimeout(() => {
+        // Очищаем ошибку и сообщение о загрузке перед перенаправлением
+        errorMessage.textContent = '';
+        loading.style.display = 'none';
+
+        // Перенаправляем на сайт
         window.location.href = record.url;
     }, 1000); // Задержка 1 секунда
 });
+
+// Функция для генерации случайного фона
+function generateBackground() {
+    const shapesContainer = document.createElement('div');
+    shapesContainer.classList.add('background-shapes');
+    document.body.appendChild(shapesContainer);
+
+    const shapeTypes = ['circle', 'square', 'triangle', 'line', 'wave', 'empty-circle', 'empty-square', 'empty-triangle'];
+    const numShapes = 50; // Количество фигур на фоне
+
+    for (let i = 0; i < numShapes; i++) {
+        const shape = document.createElement('div');
+        const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+        const size = Math.floor(Math.random() * 100) + 20; // Размер от 20px до 120px
+        const rotation = Math.floor(Math.random() * 360); // Поворот от 0 до 360 градусов
+        const positionX = Math.floor(Math.random() * window.innerWidth);
+        const positionY = Math.floor(Math.random() * window.innerHeight);
+
+        shape.style.width = `${size}px`;
+        shape.style.height = `${size}px`;
+        shape.style.position = 'absolute';
+        shape.style.top = `${positionY}px`;
+        shape.style.left = `${positionX}px`;
+        shape.style.transform = `rotate(${rotation}deg)`;
+
+        // Добавляем классы для разных типов фигур
+        shape.classList.add('shape', shapeType);
+        shapesContainer.appendChild(shape);
+    }
+}
+
+generateBackground();
